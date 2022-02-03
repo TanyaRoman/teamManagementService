@@ -1,4 +1,4 @@
-package team_management.backed.team_management_service;
+package com.solutions.torneios.team_management_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

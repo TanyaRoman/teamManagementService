@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: team-management-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/team-management
+    username: postgres
+    password: 123654
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    database: PostgreSQL
+#  liquibase:
+#    change-log: classpath:db/migration/changelog.yaml
+
+spring.security:
+  oauth2:
+    resourceserver:
+      jwt:
+        jwk-set-uri: ${KEYCLOAK_REALM_CERT_URL:http://localhost:8085}/auth/realms/myrealm/protocol/openid-connect/certs
+
+server:
+  port: 8081
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+
