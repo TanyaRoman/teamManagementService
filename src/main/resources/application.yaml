@@ -7,17 +7,17 @@ spring:
     password: 123654
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none #create #create-drop
     show-sql: false
     database: PostgreSQL
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${KEYCLOAK_REALM_CERT_URL:http://localhost:8085}/auth/realms/myrealm/protocol/openid-connect/certs
+
 #  liquibase:
 #    change-log: classpath:db/migration/changelog.yaml
-
-spring.security:
-  oauth2:
-    resourceserver:
-      jwt:
-        jwk-set-uri: ${KEYCLOAK_REALM_CERT_URL:http://localhost:8085}/auth/realms/myrealm/protocol/openid-connect/certs
 
 server:
   port: 8081

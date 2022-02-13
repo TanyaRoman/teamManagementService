@@ -30,4 +30,12 @@ public class User {
 
     @ManyToMany
     private List<Workout> workouts;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_workout",
+            joinColumns =
+                    { @JoinColumn(name = "user_id", referencedColumnName = "user_id") },
+            inverseJoinColumns =
+                    { @JoinColumn(name = "workout_id", referencedColumnName = "workout_id") })
+    private Workout workout;
 }
