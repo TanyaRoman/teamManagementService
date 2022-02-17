@@ -21,28 +21,28 @@ public class SportTypeController {
     }
 
     @GetMapping("/")
-    private List<SportType> getAllSportTypes(){
+    private List<SportType> readAll(){
         return sportTypeService.getAllSportType();
     }
 
     @GetMapping("/{id}")
-    private SportType getSportType(@PathVariable("id") UUID id){
+    private SportType read(@PathVariable("id") UUID id){
         return sportTypeService.getSportTypeById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
-    private void deleteSportType(@PathVariable("id") UUID id){
+    @DeleteMapping("/{id}")
+    private void delete(@PathVariable("id") UUID id){
         sportTypeService.delete(id);
     }
 
-    @PostMapping("/save")
-    private UUID saveSportType(SportType sportType){
+    @PostMapping("/")
+    private SportType create(@RequestBody SportType sportType){
         sportTypeService.saveOrUpdate(sportType);
-        return sportType.getId();
+        return sportType;
     }
 
-    @PutMapping("/update")
-    private SportType update(SportType sportType){
+    @PutMapping("/{id}")
+    private SportType update(@RequestBody SportType sportType){
         sportTypeService.saveOrUpdate(sportType);
         return sportType;
     }

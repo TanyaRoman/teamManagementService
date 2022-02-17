@@ -20,29 +20,29 @@ public class WorkoutController {
         this.workoutService = workoutService;
     }
 
-    @GetMapping("/all")
-    private List<Workout> getAllWorkout(){
+    @GetMapping("/")
+    private List<Workout> readAll(){
         return workoutService.getAllWorkouts();
     }
 
     @GetMapping("/{id}")
-    private Workout getWorkout(@PathVariable("id") UUID id){
+    private Workout read(@PathVariable("id") UUID id){
         return workoutService.getWorkoutById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
-    private void deleteWorkout(@PathVariable("id") UUID id){
+    @DeleteMapping("/{id}")
+    private void delete(@PathVariable("id") UUID id){
         workoutService.delete(id);
     }
 
-    @PostMapping("/save")
-    private UUID saveWorkout(Workout workout){
+    @PostMapping("/")
+    private Workout save(@RequestBody Workout workout){
         workoutService.saveOrUpdate(workout);
-        return workout.getId();
+        return workout;
     }
 
-    @PutMapping("/update")
-    private Workout update(Workout workout){
+    @PutMapping("/{id}")
+    private Workout update(@RequestBody Workout workout){
         workoutService.saveOrUpdate(workout);
         return workout;
     }

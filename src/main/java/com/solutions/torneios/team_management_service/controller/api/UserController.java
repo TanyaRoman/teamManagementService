@@ -20,28 +20,28 @@ public class UserController {
     }
 
     @GetMapping("/")
-    private List<User> getAllUsers(){
+    private List<User> readAll(){
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    private User getUser(@PathVariable("id") UUID id){
+    private User read(@PathVariable("id") UUID id){
         return userService.getUserById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
-    private void deleteUser(@PathVariable("id") UUID id){
+    @DeleteMapping("/{id}")
+    private void delete(@PathVariable("id") UUID id){
         userService.delete(id);
     }
 
-    @PostMapping("/save")
-    private UUID saveUser(User user){
+    @PostMapping("/")
+    private User save(@RequestBody User user){
         userService.saveOrUpdate(user);
-        return user.getId();
+        return user;
     }
 
-    @PutMapping("/update")
-    private User update(User user){
+    @PutMapping("/{id}")
+    private User update(@RequestBody User user){
         userService.saveOrUpdate(user);
         return user;
     }

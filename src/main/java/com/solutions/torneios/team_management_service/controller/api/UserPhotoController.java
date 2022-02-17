@@ -20,28 +20,28 @@ public class UserPhotoController {
     }
 
     @GetMapping("/")
-    private List<UserPhoto> getAllUserPhotos(){
+    private List<UserPhoto> readAll(){
         return userPhotoService.getAllUsersPhotos();
     }
 
     @GetMapping("/{id}")
-    private UserPhoto getUserPhoto(@PathVariable("id") UUID id){
+    private UserPhoto read(@PathVariable("id") UUID id){
         return userPhotoService.getUserPhotoById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
-    private void deleteUserPhoto(@PathVariable("id") UUID id){
+    @DeleteMapping("/{id}")
+    private void delete(@PathVariable("id") UUID id){
         userPhotoService.delete(id);
     }
 
     @PostMapping("/")
-    private UUID saveUserPhoto(UserPhoto userPhoto){
+    private UserPhoto save(@RequestBody UserPhoto userPhoto){
         userPhotoService.saveOrUpdate(userPhoto);
-        return userPhoto.getId();
+        return userPhoto;
     }
 
     @PutMapping("/")
-    private UserPhoto update(UserPhoto userPhoto){
+    private UserPhoto update(@RequestBody UserPhoto userPhoto){
         userPhotoService.saveOrUpdate(userPhoto);
         return userPhoto;
     }

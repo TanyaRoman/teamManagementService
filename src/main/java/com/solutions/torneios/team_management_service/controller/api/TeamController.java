@@ -21,28 +21,28 @@ public class TeamController {
     }
 
     @GetMapping("/")
-    private List<Team> getAllTeams(){
+    private List<Team> readAll(){
         return teamService.getAllTeams();
     }
 
     @GetMapping("/{id}")
-    private Team getTeam(@PathVariable("id") UUID id){
+    private Team read(@PathVariable("id") UUID id){
         return teamService.getTeamById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
-    private void deleteTeam(@PathVariable("id") UUID id){
+    @DeleteMapping("/{id}")
+    private void delete(@PathVariable("id") UUID id){
         teamService.delete(id);
     }
 
-    @PostMapping("/save")
-    private UUID saveTeam(Team team){
+    @PostMapping("/")
+    private Team create(@RequestBody Team team){
         teamService.saveOrUpdate(team);
-        return team.getId();
+        return team;
     }
 
-    @PutMapping("/update")
-    private Team update(Team team){
+    @PutMapping("/{id}")
+    private Team update(@RequestBody Team team){
         teamService.saveOrUpdate(team);
         return team;
     }
