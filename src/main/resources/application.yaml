@@ -2,28 +2,32 @@ spring:
   application:
     name: team-management-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/team-management
-    username: postgres
-    password: 123654
+    url: jdbc:postgresql://localhost:5432/payment
+    username: head
+    password: 456890
   jpa:
     hibernate:
-      ddl-auto: none #create #create-drop
+      ddl-auto: update #create
     show-sql: false
-    database: PostgreSQL
+#    database: PostgreSQL
   security:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: ${KEYCLOAK_REALM_CERT_URL:http://localhost:8085}/auth/realms/myrealm/protocol/openid-connect/certs
+          issuer-uri: ${KEYCLOAK_REALM_CERT_URL:http://localhost:8085}/auth/realms/myrealm
+#          jwk-set-uri: ${KEYCLOAK_REALM_CERT_URL:http://localhost:8085}/auth/realms/myrealm/protocol/openid-connect/certs
+  cloud:
+    config:
+      enabled: false
 
 #  liquibase:
 #    change-log: classpath:db/migration/changelog.yaml
 
 server:
-  port: 8081
+  port: ${SERVER_PORT:8081}
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_URL:http://localhost:8761}/eureka/
 
 

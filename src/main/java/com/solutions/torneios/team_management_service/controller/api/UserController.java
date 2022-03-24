@@ -2,6 +2,8 @@ package com.solutions.torneios.team_management_service.controller.api;
 
 import com.solutions.torneios.team_management_service.persistence.entity.User;
 import com.solutions.torneios.team_management_service.service.logic.UserService;
+import com.solutions.torneios.team_management_service.service.model.UserDto;
+import com.solutions.torneios.team_management_service.service.model.WorkoutDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +12,8 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
+
 public class UserController {
 
     private final UserService userService;
@@ -20,12 +24,12 @@ public class UserController {
     }
 
     @GetMapping("/")
-    private List<User> readAll(){
+    private List<UserDto> readAll(){
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    private User read(@PathVariable("id") UUID id){
+    private UserDto read(@PathVariable("id") UUID id){
         return userService.getUserById(id);
     }
 
@@ -35,14 +39,16 @@ public class UserController {
     }
 
     @PostMapping("/")
-    private User save(@RequestBody User user){
-        userService.saveOrUpdate(user);
-        return user;
+    private UserDto save(@RequestBody UserDto userDto){
+        userService.saveOrUpdate(userDto);
+
+        return userDto;
     }
 
     @PutMapping("/{id}")
-    private User update(@RequestBody User user){
-        userService.saveOrUpdate(user);
-        return user;
+    private UserDto update(@RequestBody UserDto userDto){
+        userService.saveOrUpdate(userDto);
+        return userDto;
     }
+
 }

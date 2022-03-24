@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "sport_type")
+@Table(name = "sport_types")
 public class SportType {
 
     @Id
@@ -21,6 +21,5 @@ public class SportType {
     @Column(name = "name")
     private String name;
 
-    @OneToMany
-    private List<Workout> workouts;
+
 }

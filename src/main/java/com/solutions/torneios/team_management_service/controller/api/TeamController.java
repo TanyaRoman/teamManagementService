@@ -3,6 +3,7 @@ package com.solutions.torneios.team_management_service.controller.api;
 import com.solutions.torneios.team_management_service.persistence.entity.Team;
 import com.solutions.torneios.team_management_service.persistence.entity.User;
 import com.solutions.torneios.team_management_service.service.logic.TeamService;
+import com.solutions.torneios.team_management_service.service.model.TeamDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,8 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/teams")
+@CrossOrigin
+
 public class TeamController {
 
     private final TeamService teamService;
@@ -21,12 +24,12 @@ public class TeamController {
     }
 
     @GetMapping("/")
-    private List<Team> readAll(){
+    private List<TeamDto> readAll(){
         return teamService.getAllTeams();
     }
 
     @GetMapping("/{id}")
-    private Team read(@PathVariable("id") UUID id){
+    private TeamDto read(@PathVariable("id") UUID id){
         return teamService.getTeamById(id);
     }
 
@@ -36,14 +39,14 @@ public class TeamController {
     }
 
     @PostMapping("/")
-    private Team create(@RequestBody Team team){
-        teamService.saveOrUpdate(team);
-        return team;
+    private TeamDto create(@RequestBody TeamDto teamDto){
+        teamService.saveOrUpdate(teamDto);
+        return teamDto;
     }
 
     @PutMapping("/{id}")
-    private Team update(@RequestBody Team team){
-        teamService.saveOrUpdate(team);
-        return team;
+    private TeamDto update(@RequestBody TeamDto teamDto){
+        teamService.saveOrUpdate(teamDto);
+        return teamDto;
     }
 }

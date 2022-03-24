@@ -9,6 +9,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Table(name = "userPhotos")
 public class UserPhoto {
 
     @Id
@@ -19,7 +20,7 @@ public class UserPhoto {
     @Column(name = "photo")
     private String photo;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+
+    @Column(name = "user_id")
+    private UUID user;
 }

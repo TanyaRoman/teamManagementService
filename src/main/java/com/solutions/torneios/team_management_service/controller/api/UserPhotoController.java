@@ -2,6 +2,7 @@ package com.solutions.torneios.team_management_service.controller.api;
 
 import com.solutions.torneios.team_management_service.persistence.entity.UserPhoto;
 import com.solutions.torneios.team_management_service.service.logic.UserPhotoService;
+import com.solutions.torneios.team_management_service.service.model.UserPhotoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,8 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/userPhotos")
+@CrossOrigin
+
 public class UserPhotoController {
 
     private final UserPhotoService userPhotoService;
@@ -20,12 +23,12 @@ public class UserPhotoController {
     }
 
     @GetMapping("/")
-    private List<UserPhoto> readAll(){
+    private List<UserPhotoDto> readAll(){
         return userPhotoService.getAllUsersPhotos();
     }
 
     @GetMapping("/{id}")
-    private UserPhoto read(@PathVariable("id") UUID id){
+    private UserPhotoDto read(@PathVariable("id") UUID id){
         return userPhotoService.getUserPhotoById(id);
     }
 
@@ -35,14 +38,14 @@ public class UserPhotoController {
     }
 
     @PostMapping("/")
-    private UserPhoto save(@RequestBody UserPhoto userPhoto){
-        userPhotoService.saveOrUpdate(userPhoto);
-        return userPhoto;
+    private UserPhotoDto save(@RequestBody UserPhotoDto userPhotoDto){
+        userPhotoService.saveOrUpdate(userPhotoDto);
+        return userPhotoDto;
     }
 
     @PutMapping("/")
-    private UserPhoto update(@RequestBody UserPhoto userPhoto){
-        userPhotoService.saveOrUpdate(userPhoto);
-        return userPhoto;
+    private UserPhotoDto update(@RequestBody UserPhotoDto userPhotoDto){
+        userPhotoService.saveOrUpdate(userPhotoDto);
+        return userPhotoDto;
     }
 }

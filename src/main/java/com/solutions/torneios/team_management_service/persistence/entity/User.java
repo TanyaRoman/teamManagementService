@@ -1,41 +1,46 @@
 package com.solutions.torneios.team_management_service.persistence.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
+
 @Table(name = "users")
+
 public class User {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue//(strategy = GenerationType.IDENTITY)
+    // @GeneratedValue//(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     @Column(name = "role")
     private String role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
     private List<UserPhoto> photos;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "users")
+//@JsonIgnore
     private List<Team> teams;
 
-    @ManyToMany
-    private List<Workout> workouts;
+    @ManyToMany(mappedBy = "users")
+    private List<Workout> workouts ;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_workout",
-            joinColumns =
-                    { @JoinColumn(name = "user_id", referencedColumnName = "user_id") },
-            inverseJoinColumns =
-                    { @JoinColumn(name = "workout_id", referencedColumnName = "workout_id") })
-    private Workout workout;
+
+
 }

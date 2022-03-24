@@ -1,17 +1,21 @@
 package com.solutions.torneios.team_management_service.persistence.entity;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
+
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "workouts")
+
 public class Workout {
 
     @Id
@@ -20,10 +24,10 @@ public class Workout {
     private UUID id;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "period")
-    private int periond;
+    private int period;
 
     @Column(name = "place")
     private String place;
@@ -31,17 +35,20 @@ public class Workout {
     @Column(name = "number_of_persons")
     private int numberOfPersons;
 
-    @OneToOne(mappedBy = "workout")
-    private User user;
+    @Column(name = "team_id")
+    private UUID teamId;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_workout",
-            joinColumns = @JoinColumn(name = "workout_id", referencedColumnName = "workout_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"))
-    @MapKeyJoinColumn(name = "users_map")
-    private Map<Boolean, User> users;
+    @Column(name = "user_id")//,nullable = false)
+    private UUID userId;
+
+    @ManyToMany
+//    @JoinTable(name = "user_workout",
+//            joinColumns = @JoinColumn(name = "workout_id", referencedColumnName = "workout_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"))
+    private List<User> users;
 
     @ManyToOne
-    @JoinColumn(name = "sport_id")
     private SportType sportId;
+    private boolean request;
+
 }

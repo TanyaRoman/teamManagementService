@@ -3,6 +3,7 @@ package com.solutions.torneios.team_management_service.controller.api;
 import com.solutions.torneios.team_management_service.persistence.entity.SportType;
 import com.solutions.torneios.team_management_service.persistence.entity.User;
 import com.solutions.torneios.team_management_service.service.logic.SportTypeService;
+import com.solutions.torneios.team_management_service.service.model.SportTypeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/sportTypes")
+@CrossOrigin
 public class SportTypeController {
 
     private final SportTypeService sportTypeService;
@@ -21,12 +23,12 @@ public class SportTypeController {
     }
 
     @GetMapping("/")
-    private List<SportType> readAll(){
+    private List<SportTypeDto> readAll(){
         return sportTypeService.getAllSportType();
     }
 
     @GetMapping("/{id}")
-    private SportType read(@PathVariable("id") UUID id){
+    private SportTypeDto read(@PathVariable("id") UUID id){
         return sportTypeService.getSportTypeById(id);
     }
 
@@ -36,14 +38,14 @@ public class SportTypeController {
     }
 
     @PostMapping("/")
-    private SportType create(@RequestBody SportType sportType){
-        sportTypeService.saveOrUpdate(sportType);
-        return sportType;
+    private SportTypeDto create(@RequestBody SportTypeDto sportTypeDto){
+        sportTypeService.saveOrUpdate(sportTypeDto);
+        return sportTypeDto;
     }
 
     @PutMapping("/{id}")
-    private SportType update(@RequestBody SportType sportType){
-        sportTypeService.saveOrUpdate(sportType);
-        return sportType;
+    private SportTypeDto update(@RequestBody SportTypeDto sportTypeDto){
+        sportTypeService.saveOrUpdate(sportTypeDto);
+        return sportTypeDto;
     }
 }
